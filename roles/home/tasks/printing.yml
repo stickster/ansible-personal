@@ -1,0 +1,4 @@
+---
+- name: configure firewall for IPP client
+  become: true
+  firewalld: service=ipp-client state=enabled permanent=yes immediate=yes
