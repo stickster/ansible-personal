@@ -10,6 +10,7 @@
   hosts: public
   roles:
     - webserver
+    - drupal
 
 - name: Set up any of my home Linux systems
   hosts: private

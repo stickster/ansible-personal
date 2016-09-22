@@ -1,0 +1,9 @@
+---
+# Only install Drupal 7 core; manage modules locally
+- name: install Drupal 7
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - drupal7
+    - php
+    - php-mysql
