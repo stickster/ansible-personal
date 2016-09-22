@@ -6,16 +6,20 @@
   roles:
     - common
 
-- name: Set up webservers
-  hosts: webservers
+- name: Set up public machines
+  hosts: public
   roles:
     - webserver
 
-- name: Set up work laptop
-  hosts: worklaptop
+- name: Set up any of my home Linux systems
+  hosts: private
   roles:
     - webserver
-    - workclient
     - packaging
     - design
     - rpmfusion
+
+- name: Set up my work laptop
+  hosts: worklaptop
+  roles:
+    - workclient
