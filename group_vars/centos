@@ -1,0 +1,3 @@
+---
+package_manager: yum
+web_server_package_group: web-server

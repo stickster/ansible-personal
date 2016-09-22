@@ -1,0 +1,6 @@
+---
+# Install a web server
+
+- name: install the latest web server group
+  become: true
+  package: name=@{{ web_server_package_group }} state=latest

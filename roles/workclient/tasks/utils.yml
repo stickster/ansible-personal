@@ -1,0 +1,8 @@
+---
+- name: install CLI utilities
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - tmux
+    - task
+    - hub

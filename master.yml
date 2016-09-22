@@ -1,0 +1,21 @@
+---
+# This playbook runs all setup tasks on registered hosts
+
+- name: Set up common configurations
+  hosts: all
+  roles:
+    - common
+
+- name: Set up webservers
+  hosts: webservers
+  roles:
+    - webserver
+
+- name: Set up work laptop
+  hosts: worklaptop
+  roles:
+    - webserver
+    - workclient
+    - packaging
+    - design
+    - rpmfusion
