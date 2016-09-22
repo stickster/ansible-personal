@@ -5,6 +5,7 @@
   hosts: all
   roles:
     - common
+    - { role: firewalld, when: ansible_distribution == 'CentOS' }
 
 - name: Set up public machines
   hosts: public

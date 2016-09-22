@@ -1,0 +1,6 @@
+---
+- name: install firewalld
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - firewalld
