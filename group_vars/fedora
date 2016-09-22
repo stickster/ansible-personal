@@ -1,3 +1,0 @@
----
-package_manager: dnf
-web_server_package_group: web-server
