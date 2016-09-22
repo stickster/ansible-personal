@@ -1,5 +1,5 @@
 #ungrouped
-#localhost
+localhost
 
 [public]
 www.frields.org
@@ -13,10 +13,6 @@ bettie.internal.frields.org
 scarlett.internal.frields.org
 
 [worklaptop]
-raquel-eth.internal.frields.org
-
-[webservers]
-www.frields.org
 raquel-eth.internal.frields.org
 
 [centos]
