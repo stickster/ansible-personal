@@ -2,3 +2,4 @@
 - name: install Fedora packaging tools
   become: true
   package: name=fedora-packager state=latest
+  when: ansible_distribution == 'Fedora'
