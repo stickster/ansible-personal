@@ -6,6 +6,7 @@
   with_items:
     - drupal7
     - php
-    - php-mysql
     - php-gd
     - php-mbstring
+
+- include: "{{ ansible_distribution }}.yml"
