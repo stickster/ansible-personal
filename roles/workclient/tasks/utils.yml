@@ -6,6 +6,7 @@
     - tmux
     - task
     - hub
+    - vagrant
 - name: install Emacs helpers
   become: true
   package: name={{ item }} state=latest
