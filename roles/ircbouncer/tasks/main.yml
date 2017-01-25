@@ -1,0 +1,18 @@
+---
+- name: install bouncer
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - znc
+- name: install user cronjob
+  cron:
+    name: "check bouncer"
+    minute: "*/5"
+    job: "/bin/sh -c \"if test -z \\\"`pgrep -u $UID znc`\\\"; then znd; fi 2>&1 >/dev/null\""
+- name: open firewall port
+  become: true
+  firewalld:
+    permanent: yes
+    immediate: yes
+    port: "19107/tcp"
+    state: enabled

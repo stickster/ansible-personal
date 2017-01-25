@@ -12,6 +12,7 @@
   roles:
     - webserver
     - drupal
+    - { role: ircbouncer, tags: ['ircbouncer'] }
 
 - name: Set up any of my home Linux systems
   hosts: private
