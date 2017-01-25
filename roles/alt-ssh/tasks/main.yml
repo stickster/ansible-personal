@@ -1,0 +1,13 @@
+---
+- name: set up alternate SSH port
+  become: true
+  seport:
+    ports: "{{ alt_ssh_port }}"
+    proto: tcp
+    setype: ssh_port_t
+    state: present
+- name: set up sshd_config
+  become: true
+  template: src=sshd_config.template dest=/etc/ssh/sshd_config backup=yes owner=0 group=0 mode=0600 validate='/usr/sbin/sshd -T -f %s'
+  notify:
+    - restart sshd
