@@ -10,21 +10,21 @@
 - name: Set up public machines
   hosts: public
   roles:
-    - webserver
-    - drupal
+    - { role: webserver, tags: ['webserver'] }
+    - { role: drupal, tags: ['drupal'] }
     - { role: ircbouncer, tags: ['ircbouncer'] }
 
 - name: Set up any of my home Linux systems
   hosts: private
   roles:
-    - webserver
-    - packaging
-    - design
-    - rpmfusion
-    - home
+    - { role: webserver, tags: ['webserver'] }
+    - { role: packaging, tags: ['packaging'] }
+    - { role: design, tags: ['design'] }
+    - { role: rpmfusion, tags: ['rpmfusion'] }
+    - { role: home, tags: ['home'] }
 
 - name: Set up my work laptop
   hosts: worklaptop
   roles:
-    - workclient
-    - drupal
+    - { role: workclient, tags: ['workclient'] }
+    - { role: drupal, tags: ['drupal'] }
