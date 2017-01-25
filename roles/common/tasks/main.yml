@@ -5,3 +5,8 @@
   with_items:
     - emacs-nox
     - git
+- name: install authorized SSH key
+  authorized_key:
+    key: "https://pfrields.fedorapeople.org/configs/id_rsa.pub"
+    state: present
+    user: "{{ ansible_user }}"
