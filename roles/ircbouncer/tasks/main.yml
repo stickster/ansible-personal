@@ -8,7 +8,7 @@
   cron:
     name: "check bouncer"
     minute: "*/5"
-    job: "/bin/sh -c \"if test -z \\\"`pgrep -u $UID znc`\\\"; then znd; fi 2>&1 >/dev/null\""
+    job: "/bin/sh -c \"if test -z \\\"`pgrep -u $UID znc`\\\"; then znc; fi 2>&1 >/dev/null\""
 - name: open firewall port
   become: true
   firewalld:
