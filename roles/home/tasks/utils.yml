@@ -19,3 +19,11 @@
     - emacs-pymacs
     - emacs-rpm-spec-mode
     - emacs-yaml-mode
+- name: install graphical utilities
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - pavucontrol
+    - paprefs
+    - gnome-tweak-tool
+    
