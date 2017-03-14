@@ -23,9 +23,15 @@
     - { role: design, tags: ['design'] }
     - { role: rpmfusion, tags: ['rpmfusion'] }
     - { role: home, tags: ['home'] }
+    - { role: google-chrome, tags: ['google-chrome'] }
 
 - name: Set up my work laptop
   hosts: worklaptop
   roles:
     - { role: workclient, tags: ['workclient'] }
     - { role: drupal, tags: ['drupal'] }
+
+- name: Set up workstations
+  hosts: workstations
+  roles:
+    - { role: google-musicmanager, tags: ['google-musicmanager'] }

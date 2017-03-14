@@ -1,0 +1,10 @@
+---
+# Install Google Chrome repo and browser
+
+- name: install google-chrome repo
+  become: true
+  copy: src=google-chrome.repo dest=/etc/yum.repos.d/google-chrome.repo
+
+- name: install Google Chrome browser
+  become: true
+  package: name=google-chrome-stable state=latest
