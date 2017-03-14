@@ -6,6 +6,7 @@
     - tmux
     - tmuxinator
     - tmate
+    - tmux-powerline
 - name: install Emacs helpers
   become: true
   package: name={{ item }} state=latest
