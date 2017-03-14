@@ -1,0 +1,12 @@
+---
+# Bootstrapping for Fedora or CentOS
+
+- name: install Python and Ansible deps for Fedora
+  become: true
+  raw: dnf install -y python2 python2-dnf libselinux-python libsemanage-python python2-firewall
+  when: ansible_distribution == 'Fedora'
+
+- name: install Python and Ansible deps for CentOS
+  become: true
+  raw: dnf install -y python libselinux-python libsemanage-python python-firewall
+  when: ansible_distribution == 'CentOS'

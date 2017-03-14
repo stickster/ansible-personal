@@ -1,0 +1,7 @@
+---
+# Bootstrap required packages and other stuff to get a system going
+
+- name: Bootstrap minimum content for Ansible
+  hosts: all
+  roles:
+    - { role: bootstrap, tags: ['bootstrap'] }
