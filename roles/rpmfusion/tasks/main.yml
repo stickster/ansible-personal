@@ -1,0 +1,10 @@
+---
+# Install rpmfusion repo support
+
+- name: install rpmfusion repos
+  become: true
+  package: name=https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm state=latest
+  with_items:
+    - free
+    - nonfree
+
