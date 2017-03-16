@@ -8,6 +8,7 @@
     - tmate
     - tmux-powerline
     - powerline-fonts
+    - pdfmerge
 - name: install Emacs helpers
   become: true
   package: name={{ item }} state=latest
