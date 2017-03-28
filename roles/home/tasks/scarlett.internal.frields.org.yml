@@ -1,0 +1,9 @@
+---
+# specific to scarlett hardware
+
+- name: install layla24 firmware
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - alsa-firmware
+    - alsa-tools
