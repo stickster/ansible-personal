@@ -8,3 +8,10 @@
     - free
     - nonfree
 
+- name: install rpmfusion content
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - gstreamer1-plugins-bad-free
+    - gstreamer1-plugins-bad-nonfree
+    - gstreamer1-plugins-ugly
