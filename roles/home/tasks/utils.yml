@@ -9,6 +9,8 @@
     - tmux-powerline
     - powerline-fonts
     - pdfmerge
+    - python-ipython
+    - python3-ipython
 - name: install Emacs helpers
   become: true
   package: name={{ item }} state=latest
