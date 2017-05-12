@@ -1,0 +1,57 @@
+---
+- name: install local postfix server
+  become: true
+  package: name={{ item }} state=latest
+  with_items:
+    - postfix
+
+- name: configure postfix main.cf options
+  become: true
+  raw: postconf -e {{ item.name }}={{ item.value }}
+  with_items:
+    - {name: 'smtp_sender_dependent_authentication', value: 'yes'}
+    - {name: 'sender_dependent_relayhost_maps', value: 'hash:/etc/postfix/sender_relay'}
+    - {name: 'smtp_defer_if_no_mx_address_found', value: 'yes'}
+    - {name: 'smtp_sasl_auth_enable', value: 'yes'}
+    - {name: 'smtp_sasl_security_options', value: 'noanonymous'}
+    - {name: 'smtp_sasl_password_maps', value: 'hash:/etc/postfix/sasl_passwd'}
+    - {name: 'smtp_tls_policy_maps', value: 'hash:/etc/postfix/tls_policy'}
+    - {name: 'smtp_use_tls', value: 'yes'}
+    - {name: 'smtp_tls_note_starttls_offer', value: 'yes'}
+    - {name: 'smtp_tls_CApath', value: '/etc/pki/tls/certs'}
+    - {name: 'smtp_tls_fingerprint_digest', value: 'sha1'}
+    - {name: 'transport_retry_time', value: '300s'}
+    - {name: 'defer_transports', value: ''}
+    - {name: 'soft_bounce', value: 'yes'}
+    - {name: 'inet_protocols', value: 'ipv4'}
+    - {name: 'smtpd_relay_restrictions', value: 'permit_mynetworks permit_sasl_authenticated defer_unauth_destination'}
+
+- name: configure postfix master.cf for additional transport
+  become: true
+  raw: postconf -e -M 10025/type=inet
+
+- name: configure postfix master.cf options
+  become: true
+  raw: postconf -e -F 10025/inet/{{ item.name }}={{ item.value }}
+  with_items:
+    - {name: 'private', value: 'no'}
+    - {name: 'chroot', value: 'no'}
+    - {name: 'command', value: 'smtpd'}
+
+- name: configure other postfix files
+  become: true
+  include_vars: secure_vars.yml
+  template: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+  with_items:
+    - {src: 'transport.j2', dest: '/etc/postfix/transport', owner: 'root', group: 'root', mode: '0644'}
+    - {src: 'sasl_passwd.j2', dest: '/etc/postfix/sasl_passwd', owner: 'root', group: 'root', mode: '0600'}
+    - {src: 'sender_relay.j2', dest: '/etc/postfix/sender_relay', owner: 'root', group: 'root', mode: '0644'}
+    - {src: 'tls_policy.j2', dest: '/etc/postfix/tls_policy', owner: 'root', group: 'root', mode: '0644'}
+
+- name: add NetworkManager dispatcher for postfix
+  become: true
+  copy: src=10-postfix dest=/etc/NetworkManager/dispatcher.d/10-postfix owner=root group=root mode=0755
+
+# There's probably a better way to do this with a handler.
+- name: enable postfix service
+  service: name=postfix enabled=yes state=restarted

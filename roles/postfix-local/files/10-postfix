@@ -1,0 +1,48 @@
+#!/bin/sh
+# 
+# (C) 2009-2013 Paul W. Frields. Licensed under MIT license.
+# 
+# This script is meant to be dropped into your
+# /etc/NetworkManager/dispatcher.d/ directory.
+
+function update_deferrals {
+    CORP="10025"
+    DEFERRALS=`/usr/sbin/postconf -n -h defer_transports 2>/dev/null`
+    ORIG_DEFERRALS=$DEFERRALS
+    
+    if [ "$2" == "down" ]; then
+	if [ -z "`/sbin/ip route show 0.0.0.0/0`" ]; then
+	    if [ -z "`echo $DEFERRALS | /bin/grep smtp`" ]; then
+		DEFERRALS="${DEFERRALS:+${DEFERRALS/%/,}}smtp"
+	    fi
+	fi
+    elif [ "$2" == "vpn-down" ]; then
+	if [ -z "`/sbin/ip link show tun0 2>/dev/null`" ]; then
+	    if [ -z "`echo $DEFERRALS | /bin/grep $CORP`" ]; then
+		DEFERRALS="${DEFERRALS:+${DEFERRALS/%/,}}$CORP"
+	    fi
+	fi
+    elif [ "$2" == "up" ]; then
+	FLUSH=yes
+	sleep 1
+	if [ ! -z "`/sbin/ip route show 0.0.0.0/0`" ]; then
+	    DEFERRALS=$(echo ${DEFERRALS/smtp/} | /bin/sed 's/\(^,\|,$\)//g')
+	fi
+    elif [ "$2" == "vpn-up" ]; then
+	FLUSH=yes
+	sleep 1
+	ping -c1 mail.corp.redhat.com >/dev/null
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ]; then
+	    DEFERRALS=$(echo ${DEFERRALS/$CORP/} | /bin/sed 's/\(^,\|,$\)//g')
+	fi
+    fi
+    
+    if [ "$DEFERRALS" != "$ORIG_DEFERRALS" ]; then
+	/usr/sbin/postconf -e "defer_transports = ${DEFERRALS}"
+	/usr/sbin/postfix reload
+	[ -z "$FLUSH" ] || /usr/sbin/postfix flush
+    fi
+}
+
+update_deferrals "$1" "$2" &

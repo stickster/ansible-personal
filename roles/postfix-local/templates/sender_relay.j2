@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+# per-sender provider; see also /etc/postfix/sasl_passwd
+@gmail.com                      [smtp.gmail.com]:587
+@fedoraproject.org              [smtp.gmail.com]:587
+@redhat.com                     [{{ vpn_hostname }}]:25
