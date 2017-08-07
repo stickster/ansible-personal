@@ -31,5 +31,6 @@
     - gnome-tweak-tool
     - Zim
     - easytag
+    - gobby05
 
 - include: "{{ ansible_fqdn }}.yml"
