@@ -1,9 +1,11 @@
 ---
-- name: install work-related CLI utilities
+- name: install work-related CLI utilities and libraries
   become: true
   package: name={{ item }} state=latest
   with_items:
     - task
     - hub
     - vagrant
-    
+    - vagrant-libvirt
+    - python3-jira
+
