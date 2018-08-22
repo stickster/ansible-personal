@@ -4,11 +4,19 @@
   package: name={{ item }} state=latest
   with_items:
     - znc
-- name: install user cronjob
-  cron:
-    name: "check bouncer"
-    minute: "*/5"
-    job: "/bin/sh -c \"if test -z \\\"`pgrep -u $UID znc`\\\"; then znc; fi 2>&1 >/dev/null\""
+- name: install systemd unit
+  copy:
+    src: znc.service
+    dest: /etc/systemd/system/znc.service
+    owner: root
+    group: root
+    mode: 0644
+- name: enable systemd unit
+  systemd:
+    daemon_reload: yes
+    name: znc.service
+    enabled: yes
+    state: started
 - name: open firewall port
   become: true
   firewalld:
