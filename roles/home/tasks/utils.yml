@@ -11,6 +11,7 @@
     - pdfmerge
     - python-ipython
     - python3-ipython
+    - python2-libselinux
 - name: install Emacs helpers
   become: true
   package: name={{ item }} state=latest
