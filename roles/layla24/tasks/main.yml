@@ -1,5 +1,4 @@
 ---
-# specific to scarlett hardware
 
 - name: install layla24 firmware
   become: true
