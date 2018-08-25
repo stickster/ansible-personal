@@ -9,18 +9,20 @@ workstations
 worklaptop
 
 [workstations]
-bettie.internal.frields.org
-scarlett.internal.frields.org
+bettie
+scarlett
 
 [worklaptop]
-raquel-eth.internal.frields.org
+raquel
+taraji
 
 [usepaul]
-bettie.internal.frields.org
-scarlett.internal.frields.org
+bettie
+scarlett
 
 [usepfrields]
 www.frields.org
-raquel-eth.internal.frields.org
-sofia.internal.frields.org
-evie-mac.internal.frields.org
+raquel-eth
+sofia
+taraji
+evie-mac
