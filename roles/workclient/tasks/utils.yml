@@ -11,3 +11,4 @@
     - python2-ansi2html
     - perl-HTML-Parser
     - openldap-clients
+    - goobook
