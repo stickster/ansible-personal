@@ -7,6 +7,7 @@
     - git
     - avahi-tools
     - powertop
+    - irssi
 - name: enable powertop service
   become: true
   systemd:
