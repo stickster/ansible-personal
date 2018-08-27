@@ -8,4 +8,6 @@
     - vagrant
     - vagrant-libvirt
     - python3-jira
+    - python2-ansi2html
+    - perl-HTML-Parser
 
