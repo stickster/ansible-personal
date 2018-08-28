@@ -33,3 +33,23 @@
     - Zim
     - easytag
     - gobby05
+- name: install Microsoft pubkey
+  become: true
+  rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+- name: add VS Code yum repository
+  become: true
+  yum_repository:
+    name: code
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    file: vscode
+- name: install VS Code
+  become: true
+  package:
+    name: code
+    state: latest
