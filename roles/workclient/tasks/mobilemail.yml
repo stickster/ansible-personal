@@ -7,4 +7,79 @@
     - offlineimap
     - postfix
 
-# TODO: add config stuff here for these
+# This is obsolete now that I'm using GMail.
+# - name: Set up postfix master outgoing service
+#   become: true
+#   command: postconf -e -M 10025/inet="10025     inet    n     -     n     -     -     smtpd"
+
+# - name: Set up postfix master incoming service
+#   become: true
+#   command: postconf -e -M 10025/unix="10025     unix     -     -     n     -     -     smtp"
+
+- name: Set up postfix main configs
+  become: true
+  command: postconf -e {{ item }}
+  with_items:
+    - smtp_sender_dependent_authentication=yes
+    - sender_dependent_relayhost_maps=hash:/etc/postfix/sender_relay
+    - smtp_defer_if_no_mx_address_found=yes
+    - smtp_sasl_auth_enable=yes
+    - smtp_sasl_security_options=noanonymous
+    - smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd
+    - smtp_tls_policy_maps=hash:/etc/postfix/tls_policy
+    - smtp_use_tls=yes
+    - smtp_tls_note_starttls_offer=yes
+    - smtp_tls_CApath=/etc/pki/tls/certs
+    - smtp_tls_fingerprint_digest=sha1
+    - smtp_tls_security_level=encrypt
+    - transport_retry_time=300s
+    - defer_transports=
+    - soft_bounce=yes
+    - inet_protocols=ipv4
+    - smtpd_relay_restrictions='permit_mynetworks permit_sasl_authenticated defer_unauth_destination'
+
+- name: Set up additional postfix config files
+  become: true
+  copy:
+    src: "{{ item }}"
+    dest: /etc/postfix/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - sender_relay
+    - sasl_passwd
+    - tls_policy
+    - transport
+
+- name: Hash postfix files
+  become: true
+  command: postmap /etc/postfix/{{ item }}
+  with_items:
+    - main.cf
+    - sasl_passwd
+    - tls_policy
+    - sender_relay
+    - transport
+
+- name: Set up NetworkManager dispatcher
+  become: true
+  copy:
+    src: 10-postfix
+    dest: /etc/NetworkManager/dispatcher.d/10-postfix
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Start postfix server
+  become: true
+  systemd:
+    name: postfix.service
+    state: restarted
+    enabled: yes
+
+- name: Reload NetworkManager
+  become: true
+  systemd:
+    name: NetworkManager.service
+    state: reloaded
