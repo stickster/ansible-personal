@@ -35,3 +35,8 @@
   hosts: workstations
   roles:
     - { role: google-musicmanager, tags: ['google-musicmanager'] }
+
+- name: Set up scarlett
+  hosts: scarlett
+  roles:
+    - {role: syslog-server, tags: ['syslog-server'] }

@@ -1,0 +1,31 @@
+---
+- name: install socat
+  become: true
+  package:
+    name: socat
+    state: latest
+
+- name: Set up socat listener for syslog
+  become: true
+  copy:
+    src: syslog-socat-udp.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Open firewall port for syslog
+  become: true
+  firewalld:
+    permanent: yes
+    immediate: yes
+    port: "514/udp"
+    state: enabled
+
+- name: Start listener service
+  become: true
+  systemd:
+    daemon_reload: yes
+    name: syslog-socat-udp.service
+    enabled: yes
+    state: started

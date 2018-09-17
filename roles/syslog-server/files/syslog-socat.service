@@ -1,0 +1,9 @@
+[Unit]
+Description=Syslog receiver for routers
+
+[Service]
+Restart=on-success
+ExecStart=/usr/bin/socat -u UDP-RECV:514 STDOUT
+
+[Install]
+WantedBy=network-online.target
