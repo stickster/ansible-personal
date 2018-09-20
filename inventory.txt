@@ -8,6 +8,10 @@ www.frields.org
 workstations
 worklaptop
 
+[private:vars]
+# If I'm running it at home, it's Fedora.
+ansible_python_interpreter=/usr/bin/python3
+
 [workstations]
 bettie
 scarlett
