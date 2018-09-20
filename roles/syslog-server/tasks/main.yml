@@ -8,7 +8,7 @@
 - name: Set up socat listener for syslog
   become: true
   copy:
-    src: syslog-socat-udp.service
+    src: syslog-socat.service
     dest: /etc/systemd/system/
     owner: root
     group: root
@@ -26,6 +26,6 @@
   become: true
   systemd:
     daemon_reload: yes
-    name: syslog-socat-udp.service
+    name: syslog-socat.service
     enabled: yes
     state: started
