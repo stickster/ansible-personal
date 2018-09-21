@@ -31,7 +31,6 @@
     - pavucontrol
     - paprefs
     - gnome-tweak-tool
-    - Zim
     - easytag
     - gobby05
 - name: install Microsoft pubkey
