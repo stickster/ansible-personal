@@ -53,3 +53,9 @@
   package:
     name: code
     state: latest
+- name: enable SSH service
+  become: true
+  systemd:
+    name: sshd.service
+    state: started
+    enabled: yes
