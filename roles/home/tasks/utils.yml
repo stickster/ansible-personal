@@ -1,7 +1,7 @@
 ---
 - name: install common CLI utilities
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - tmux
     - tmuxinator
@@ -15,7 +15,7 @@
     - python2-dbus
 - name: install Emacs helpers
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - emacs-auto-complete
     - emacs-color-theme
@@ -26,7 +26,7 @@
     - emacs-yaml-mode
 - name: install graphical utilities
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - pavucontrol
     - paprefs
@@ -50,7 +50,7 @@
     file: vscode
 - name: install VS Code
   become: true
-  package:
+  dnf:
     name: code
     state: latest
 - name: enable SSH service
