@@ -3,14 +3,14 @@
 
 - name: install rpmfusion repos
   become: true
-  package: name=https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm state=latest
+  dnf: name=https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm state=latest
   with_items:
     - free
     - nonfree
 
 - name: install rpmfusion content
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - gstreamer1-plugins-bad-free
     - gstreamer1-plugins-bad-nonfree

@@ -1,7 +1,7 @@
 ---
 - name: install graphics design tools
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - inkscape
     - gimp
@@ -11,7 +11,7 @@
 
 - name: install useful fonts
   become: true
-  package: name={{ item }} state=latest
+  dnf: name={{ item }} state=latest
   with_items:
     - google-roboto-slab-fonts
     - julietaula-montserrat-fonts
