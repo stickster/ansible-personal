@@ -8,3 +8,7 @@
 - name: install Google Chrome browser
   become: true
   package: name=google-chrome-stable state=latest
+
+- name: install GNOME Shell integration
+  become: true
+  package: name=chrome-gnome-shell state=latest
