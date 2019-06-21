@@ -7,6 +7,9 @@
     - offlineimap
     - postfix
     - notmuch
+    - perl-MailTools
+    - perl-Mail-Box
+    - perl-String-ShellQuote
 
 # This is obsolete now that I'm using GMail.
 # - name: Set up postfix master outgoing service
