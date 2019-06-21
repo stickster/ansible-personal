@@ -10,7 +10,6 @@
       - tmux-powerline
       - powerline-fonts
       - pdfmerge
-      - python-ipython
       - python3-ipython
       - python2-libselinux
       - python2-dbus
