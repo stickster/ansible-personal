@@ -1,38 +1,41 @@
 ---
 - name: install common CLI utilities
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - tmux
-    - tmuxinator
-    - tmate
-    - tmux-powerline
-    - powerline-fonts
-    - pdfmerge
-    - python-ipython
-    - python3-ipython
-    - python2-libselinux
-    - python2-dbus
+  package:
+    state: present
+    name:
+      - tmux
+      - tmuxinator
+      - tmate
+      - tmux-powerline
+      - powerline-fonts
+      - pdfmerge
+      - python-ipython
+      - python3-ipython
+      - python2-libselinux
+      - python2-dbus
 - name: install Emacs helpers
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - emacs-auto-complete
-    - emacs-color-theme
-    - emacs-gettext
-    - emacs-magit
-    - emacs-pymacs
-    - emacs-rpm-spec-mode
-    - emacs-yaml-mode
+  package:
+    state: present
+    name:
+      - emacs-auto-complete
+      - emacs-color-theme
+      - emacs-gettext
+      - emacs-magit
+      - emacs-pymacs
+      - emacs-rpm-spec-mode
+      - emacs-yaml-mode
 - name: install graphical utilities
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - pavucontrol
-    - paprefs
-    - gnome-tweak-tool
-    - easytag
-    - gobby05
+  package:
+    state: present
+    name:
+      - pavucontrol
+      - paprefs
+      - gnome-tweak-tool
+      - easytag
+      - gobby05
 - name: install Microsoft pubkey
   become: true
   rpm_key:
@@ -52,7 +55,7 @@
   become: true
   dnf:
     name: code
-    state: latest
+    state: present
 - name: enable SSH service
   become: true
   systemd:

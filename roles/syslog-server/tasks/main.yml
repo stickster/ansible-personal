@@ -3,7 +3,7 @@
   become: true
   package:
     name: socat
-    state: latest
+    state: present
 
 - name: Set up socat listener for syslog
   become: true

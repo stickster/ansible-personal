@@ -1,13 +1,14 @@
 ---
 - name: install indispensable packages
   become: true
-  package: name={{ item }} state=latest
-  with_items:
-    - emacs-nox
-    - git
-    - avahi-tools
-    - powertop
-    - irssi
+  package:
+    state: present
+    name:
+      - emacs-nox
+      - git
+      - avahi-tools
+      - powertop
+      - irssi
 - name: enable powertop service
   become: true
   systemd:

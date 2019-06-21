@@ -7,4 +7,4 @@
 
 - name: install Google Music Manager
   become: true
-  package: name=google-musicmanager-beta state=latest
+  package: name=google-musicmanager-beta state=present

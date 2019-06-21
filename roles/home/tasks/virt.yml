@@ -1,7 +1,8 @@
 ---
 - name: install virtualization
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - "@Virtualization"
-    - openssh-askpass
+  dnf:
+    state: present
+    name:
+      - "@Virtualization"
+      - openssh-askpass

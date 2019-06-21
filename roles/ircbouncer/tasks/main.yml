@@ -1,9 +1,10 @@
 ---
 - name: install bouncer
   become: true
-  package: name={{ item }} state=latest
-  with_items:
-    - znc
+  package:
+    state: present
+    name:
+      - znc
 - name: install systemd unit
   copy:
     src: znc.service

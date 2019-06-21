@@ -1,21 +1,23 @@
 ---
 - name: install graphics design tools
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - inkscape
-    - gimp
-    - xournal
-    - gpick
-    - ImageMagick
+  package:
+    state: present
+    name:
+      - inkscape
+      - gimp
+      - xournal
+      - gpick
+      - ImageMagick
 
 - name: install useful fonts
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - google-roboto-slab-fonts
-    - julietaula-montserrat-fonts
-    - typetype-molot-fonts
-    - astigmatic-grand-hotel-fonts
-    - overpass-fonts
+  package:
+    state: present
+    name:
+      - google-roboto-slab-fonts
+      - julietaula-montserrat-fonts
+      - typetype-molot-fonts
+      - astigmatic-grand-hotel-fonts
+      - overpass-fonts
   when: ansible_distribution == 'Fedora'

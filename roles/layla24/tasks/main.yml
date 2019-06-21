@@ -2,7 +2,8 @@
 
 - name: install layla24 firmware
   become: true
-  package: name={{ item }} state=latest
-  with_items:
-    - alsa-firmware
-    - alsa-tools
+  package:
+    state: present
+    name:
+      - alsa-firmware
+      - alsa-tools

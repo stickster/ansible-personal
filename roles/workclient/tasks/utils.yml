@@ -1,14 +1,15 @@
 ---
 - name: install work-related CLI utilities and libraries
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - task
-    - hub
-    - vagrant
-    - vagrant-libvirt
-    - python3-jira
-    - python2-ansi2html
-    - perl-HTML-Parser
-    - openldap-clients
-    - goobook
+  package:
+    state: present
+    name:
+      - task
+      - hub
+      - vagrant
+      - vagrant-libvirt
+      - python3-jira
+      - python2-ansi2html
+      - perl-HTML-Parser
+      - openldap-clients
+      - goobook

@@ -1,15 +1,16 @@
 ---
 - name: install mobile email tools
   become: true
-  dnf: name={{ item }} state=latest
-  with_items:
-    - mutt
-    - offlineimap
-    - postfix
-    - notmuch
-    - perl-MailTools
-    - perl-Mail-Box
-    - perl-String-ShellQuote
+  package:
+    state: present
+    name:
+      - mutt
+      - offlineimap
+      - postfix
+      - notmuch
+      - perl-MailTools
+      - perl-Mail-Box
+      - perl-String-ShellQuote
 
 # This is obsolete now that I'm using GMail.
 # - name: Set up postfix master outgoing service

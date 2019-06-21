@@ -3,4 +3,4 @@
 
 - name: install the latest web server group
   become: true
-  package: name=@web-server state=latest
+  package: name=@web-server state=present

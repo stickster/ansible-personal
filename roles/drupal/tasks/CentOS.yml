@@ -3,4 +3,4 @@
 
 - name: install PHP MySQL connector
   become: true
-  package: name=php-mysql state=latest
+  package: name=php-mysql state=present
