@@ -16,6 +16,8 @@
     - { role: drupal, tags: ['drupal'] }
     - { role: ircbouncer, tags: ['ircbouncer'] }
     - { role: public-mailserver, tags: ['public-mailserver'] }
+    #- { role: wordpress-sites, tags: ['wordpress-sites'] }
+    #- { role: drupal-sites, tags: ['drupal-sites'] }
 
 - name: Set up any of my home Linux systems
   hosts: private

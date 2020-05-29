@@ -1,0 +1,40 @@
+---
+# global: install wp-cli
+# install WordPress
+# install WP plugins
+# copy settings file
+# restore database
+# copy httpd config
+
+- name: Install WP-CLI
+  get_url:
+    url: https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    dest: /usr/bin/wp
+    mode: 0755
+
+- name: Install WP-CLI tab completions
+  get_url:
+    url: https://raw.githubusercontent.com/wp-cli/wp-cli/master/utils/wp-completion.bash
+    dest: /etc/bash_completion.d
+    mode: 0644
+
+# FIXME: Do multiple tasks even work like this?!?
+- name: Install basic site
+  file:
+    path: "/srv/www/{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: apache
+    group: apache
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "/srv/www/{{ item }}/"
+    remote_src: yes
+    keep_newer: yes
+  loop:
+    - paul.frields.org
+    - 5thdom.com
+    - acousticonion.com
+    - practicalbass.com
+    - thehousebreakers.com
+    - eleya.frields.org

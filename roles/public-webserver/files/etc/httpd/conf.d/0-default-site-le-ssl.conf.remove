@@ -1,0 +1,12 @@
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+        ServerAdmin webmaster@new.frields.org
+        ServerName new.frields.org
+        DocumentRoot "/var/www/html"
+SSLCertificateFile /etc/letsencrypt/live/paul.frields.org/cert.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/paul.frields.org/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
+ServerAlias paul.frields.org
+SSLCertificateChainFile /etc/letsencrypt/live/paul.frields.org/chain.pem
+</VirtualHost>
+</IfModule>

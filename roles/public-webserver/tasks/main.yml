@@ -1,0 +1,34 @@
+---
+# copy configs into place
+
+- name: Copy base httpd configuration files
+  copy:
+    src: etc/httpd/
+    dest: /etc/httpd/
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Open firewall for HTTP/HTTPS
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  loop:
+    - http
+    - https
+
+- name: Ensure /srv/www exists
+  file:
+    path: /srv/www
+    state: directory
+    mode: '0755'
+    owner: apache
+    group: apache
+
+- name: Enable and start web server
+  service:
+    name: httpd
+    enabled: yes
+    state: reloaded
