@@ -9,6 +9,8 @@
 - name: Set up public machines
   hosts: public
   roles:
+    - { role: epel, tags: ['epel'] }
+    - { role: remi, tags: ['remi'] }
     - { role: alt-ssh, tags: ['alt-ssh'] }
     - { role: webserver, tags: ['webserver'] }
     - { role: drupal, tags: ['drupal'] }
