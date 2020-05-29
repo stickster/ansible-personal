@@ -4,7 +4,6 @@
 - name: Set up common configurations
   hosts: all
   roles:
-    - common
     - { role: firewalld, when: ansible_distribution == 'CentOS' }
 
 - name: Set up public machines
@@ -18,6 +17,7 @@
 - name: Set up any of my home Linux systems
   hosts: private
   roles:
+    - common
     - { role: webserver, tags: ['webserver'] }
     - { role: packaging, tags: ['packaging'] }
     - { role: design, tags: ['design'] }
