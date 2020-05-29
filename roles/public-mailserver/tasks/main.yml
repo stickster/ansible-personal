@@ -1,0 +1,36 @@
+---
+- name: Install Postfix and milter
+  package:
+    name:
+      - postfix
+      - spamass-milter
+      - spamass-milter-postfix
+    state: present
+
+- name: Copy configuration files
+  copy:
+    src: etc/postfix/
+    dest: /etc/postfix/
+    mode: '0644'
+    owner: root
+    group: root
+  register: postfix_files
+
+- name: Generate new maps
+  shell:
+    cmd: /usr/sbin/postmap virtual
+    chdir: /etc/postfix/
+  when: postfix_files.changed
+
+- name: Open firewall for SMTP
+  firewalld:
+    service: smtp
+    state: enabled
+    permanent: yes
+  
+- name: Enable and start postfix
+  service:
+    name: postfix
+    state: reloaded
+    enabled: yes
+  when: postfix_files.changed
