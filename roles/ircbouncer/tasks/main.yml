@@ -13,8 +13,7 @@
     group: root
     mode: 0644
 - name: enable systemd unit
-  systemd:
-    daemon_reload: yes
+  service:
     name: znc.service
     enabled: yes
     state: started
