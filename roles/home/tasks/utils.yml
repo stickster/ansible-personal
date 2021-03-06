@@ -26,7 +26,6 @@
     state: present
     name:
       - pavucontrol
-      - paprefs
       - gnome-tweak-tool
       - easytag
 - name: install Microsoft pubkey
