@@ -22,11 +22,11 @@ taraji
 
 [usepaul]
 bettie
-scarlett
 
 [usepfrields]
 www.frields.org
 raquel-eth
+scarlett
 sofia
 taraji
 evie-mac
