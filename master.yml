@@ -34,10 +34,10 @@
     - { role: workclient, tags: ['workclient'] }
     - { role: drupal, tags: ['drupal'] }
 
-- name: Set up workstations
-  hosts: workstations
-  roles:
-    - { role: google-musicmanager, tags: ['google-musicmanager'] }
+# - name: Set up workstations
+#   hosts: workstations
+#   roles:
+#     - { role: google-musicmanager, tags: ['google-musicmanager'] }
 
 - name: Set up scarlett
   hosts: scarlett
