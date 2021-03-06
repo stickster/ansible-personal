@@ -1,6 +1,34 @@
 ---
 # Install rpmfusion repo support
 
+- name: import rpmfusion free GPG key
+  ignore_errors: true
+  become: true
+  rpm_key:
+    key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_date_time.year }}
+    state: present
+
+- name: import older rpmfusion free GPG key
+  ignore_errors: true
+  become: true
+  rpm_key:
+    key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020
+    state: present
+
+- name: import rpmfusion nonfree GPG key
+  ignore_errors: true
+  become: true
+  rpm_key:
+    key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_date_time.year }}
+    state: present
+
+- name: import older rpmfusion nonfree GPG key
+  ignore_errors: true
+  become: true
+  rpm_key:
+    key: https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020
+    state: present
+
 - name: install rpmfusion repos
   become: true
   package: name=https://download1.rpmfusion.org/{{ item }}/fedora/rpmfusion-{{ item }}-release-{{ ansible_distribution_major_version }}.noarch.rpm state=present
@@ -10,6 +38,7 @@
 
 - name: install rpmfusion content
   become: true
+  ignore_errors: true
   package:
     state: present
     name:
