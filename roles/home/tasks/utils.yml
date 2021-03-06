@@ -5,14 +5,10 @@
     state: present
     name:
       - tmux
-      - tmuxinator
-      - tmate
       - tmux-powerline
       - powerline-fonts
       - pdfmerge
       - python3-ipython
-      - python2-libselinux
-      - python2-dbus
 - name: install Emacs helpers
   become: true
   package:
@@ -22,7 +18,6 @@
       - emacs-color-theme
       - emacs-gettext
       - emacs-magit
-      - emacs-pymacs
       - emacs-rpm-spec-mode
       - emacs-yaml-mode
 - name: install graphical utilities
@@ -34,7 +29,6 @@
       - paprefs
       - gnome-tweak-tool
       - easytag
-      - gobby05
 - name: install Microsoft pubkey
   become: true
   rpm_key:
