@@ -9,6 +9,13 @@
       - powerline-fonts
       - pdfmerge
       - python3-ipython
+- name: install tmux configuration
+  copy:
+    src: tmux.conf
+    dest: "{{ ansible_user_dir }}/.tmux.conf"
+    backup: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
 - name: install Emacs helpers
   become: true
   package:
