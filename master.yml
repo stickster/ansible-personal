@@ -43,3 +43,4 @@
   hosts: scarlett
   roles:
     - {role: syslog-server, tags: ['syslog-server'] }
+    - {role: office, tags: ['office'] }

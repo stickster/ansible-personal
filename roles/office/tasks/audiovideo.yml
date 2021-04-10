@@ -1,0 +1,17 @@
+---
+- name: install extra audio/video utilities
+  become: true
+  package:
+    state: present
+    name:
+      - pulseeffects
+      - obs-studio
+      - pavucontrol
+      - pulsecaster
+- name: copy speaker profile
+  copy:
+    src: AltecLansing2.1.json
+    dest: "{{ ansible_user_dir }}/.config/PulseEffects/output/AltecLansing2.1.json"
+    backup: yes
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
