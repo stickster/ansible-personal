@@ -4,5 +4,5 @@
 - name: install the latest web server group
   become: true
   package:
-    name: "@^web-server-environment"
+    name: "@web-server"
     state: present
