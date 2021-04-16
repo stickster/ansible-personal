@@ -271,10 +271,10 @@
             "output-gain": "0"
         },
         "maximizer": {
-            "state": "false",
-            "release": "25",
-            "ceiling": "0",
-            "threshold": "0"
+            "state": "true",
+            "release": "10",
+            "ceiling": "-1.0",
+            "threshold": "-5.0"
         },
         "pitch": {
             "state": "false",
