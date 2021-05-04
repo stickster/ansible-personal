@@ -1,5 +1,0 @@
-[google-musicmanager]
-name=Google Music Manager - $basearch
-baseurl=http://dl.google.com/linux/musicmanager/rpm/stable/$basearch
-enabled=1
-gpgcheck=1
