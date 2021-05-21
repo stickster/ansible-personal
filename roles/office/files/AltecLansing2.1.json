@@ -271,7 +271,7 @@
             "output-gain": "0"
         },
         "maximizer": {
-            "state": "true",
+            "state": "false",
             "release": "10",
             "ceiling": "-1.0",
             "threshold": "-5.0"
