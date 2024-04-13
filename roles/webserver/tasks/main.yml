@@ -6,3 +6,23 @@
   package:
     name: "@web-server"
     state: present
+
+- name: install certbot
+  become: true
+  package:
+    name: "certbot"
+    state: present
+
+- name: add certbot renewal hooks
+  copy:
+    src: certbot-conf
+    dest: /etc/sysconfig/certbot
+    mode: '0644'
+    owner: root
+    group: root
+  register: certbot_files
+
+- name: Reload systemctl
+  shell:
+    cmd: /usr/bin/systemctl daemon-reload
+    when: certbot_files.changed
