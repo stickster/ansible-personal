@@ -10,11 +10,11 @@
   hosts: public
   roles:
     - { role: epel, tags: ['epel'] }
-    - { role: remi, tags: ['remi'] }
+    #- { role: remi, tags: ['remi'] }
     - { role: alt-ssh, tags: ['alt-ssh'] }
     - { role: webserver, tags: ['webserver'] }
-    - { role: drupal, tags: ['drupal'] }
-    - { role: ircbouncer, tags: ['ircbouncer'] }
+    #- { role: drupal, tags: ['drupal'] }
+    #- { role: ircbouncer, tags: ['ircbouncer'] }
     - { role: public-mailserver, tags: ['public-mailserver'] }
 
 - name: Set up any of my home Linux systems
